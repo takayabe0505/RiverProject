@@ -52,7 +52,7 @@ public class ExtractIDs {
 				if(tokens.length>=5){
 					if(!tokens[4].equals("null")){
 						String id = tokens[0];
-						String time = converttime(tokens[4]);
+						String time = getHMS(tokens[4]);
 						Date dt = SDF_TS.parse(time);
 						Double lat = Double.parseDouble(tokens[2]);
 						Double lon = Double.parseDouble(tokens[3]);
@@ -85,7 +85,7 @@ public class ExtractIDs {
 				if(tokens.length>=5){
 					if(!tokens[4].equals("null")){
 						String id = tokens[0];
-						String time = converttime(tokens[4]);
+						String time = getHMS(tokens[4]);
 						Double lat = Double.parseDouble(tokens[2]);
 						Double lon = Double.parseDouble(tokens[3]);
 						if(IDofvictim.contains(id)){ 
@@ -110,11 +110,11 @@ public class ExtractIDs {
 		}
 	}
 
-	public static String converttime(String t){
+	public static String getHMS(String t){
 		String[] x = t.split("T");
 		String time = x[1].substring(0,8);
-		String res = x[0]+ " " + time;
-		return res;
+//		String res = x[0]+ " " + time;
+		return time;
 	}
 
 }
