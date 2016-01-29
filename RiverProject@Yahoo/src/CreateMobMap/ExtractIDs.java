@@ -23,9 +23,9 @@ public class ExtractIDs {
 
 	public static void main(String args[]) throws IOException, ParseException{
 
-		String date = "20150910";
-		String start = "08:00:00"; // XX:XX:XX shape 
-		String end = "16:00:00";
+		String date = "20140727";
+		String start = "10:00:00"; // XX:XX:XX shape 
+		String end = "23:59:00";
 		
 		FileHandling.extractfromcommand(date);
 		File gpslogs = new File(basicpath+"grid/0/tmp/ktsubouc/gps_"+date+".csv");
@@ -33,7 +33,6 @@ public class ExtractIDs {
 		HashSet<String> ids_victims = extract_writeoutIDs(gpslogs,start,end); //extract the IDs of the victims
 		
 		extract_dataofvictims(gpslogs, ids_victims); //extract all the data on that day of the victims
-		
 	}
 
 	public static HashSet<String> extract_writeoutIDs(File gpslogs, String start, String end) throws IOException, ParseException{
