@@ -31,14 +31,16 @@ public class ExtractDataforVictims {
 		File dataofvictims = new File(basicpath+"gpsdataofpeopleinFloodEvent.csv");
 		//
 
-		Integer starthour = Integer.valueOf(hittime.substring(0, 2))-3;
-		Integer endhour = Integer.valueOf(hittime.substring(0, 2))+3;
+		Integer bufferhours = 4;
+		
+		Integer starthour = Integer.valueOf(hittime.substring(0,2))-bufferhours;
+		Integer endhour = Integer.valueOf(hittime.substring(0,2))+bufferhours;
 		String starttime = String.format("%02d", starthour)+":00:00";
 		String endtime = String.format("%02d", endhour)+":00:00";
-
+		
 		System.out.println(
-				"Date:"+hitdate+
-				"Starttime"+starttime+
+				"Date:"+hitdate+" "+
+				"Starttime"+starttime+" "+
 				"Endtime"+endtime);
 		
 		if(endhour<=23){
@@ -61,9 +63,12 @@ public class ExtractDataforVictims {
 //		FileHandling.extractfromcommand(hitdate);
 		extract_writeoutIDs(hitdate,starttime,"23:59:59",victimID);
 
-		String hitdateplusone = String.valueOf(Integer.valueOf(hitdate)+1);
-//		FileHandling.extractfromcommand(hitdateplusone);
-		extract_writeoutIDs(hitdate,"00:00:00",endtime,victimID);
+		String hitdateplusone = String.valueOf(Integer.valueOf(hitdate)+1); // move 1 day forward
+//		FileHandling.extractfromcommand(hitdateplusone); //uncompress 1 day forward day
+		
+		Integer endhour = Integer.valueOf(endtime.substring(0, 2));
+		String newend = String.format("%02d", endhour-24)+":00:00";
+		extract_writeoutIDs(hitdate,"00:00:00",newend,victimID);
 
 		System.out.println("Size of HashMap:"+victimID.size());
 		
@@ -81,21 +86,36 @@ public class ExtractDataforVictims {
 
 		File output  = new File("/home/t-tyabe/Data/IDofpeopleinFloodEvent.csv");
 		BufferedReader br = new BufferedReader(new FileReader(gpslogs));
-		BufferedWriter bw = new BufferedWriter(new FileWriter(output));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(output,true));
 		String line = null;
 		String prevline = null;
+		
+		// to delete after check
+		int count1 = 0;
+		int count2 = 0;
+		int count3 = 0;
+		int count4 = 0;
+		int count5 = 0;
+		
+		//
+		
 		while((line=br.readLine())!=null){
 			if(SameLogCheck(line,prevline)==true){
+				count1++;
 				String[] tokens = line.split("\t");
 				if(tokens.length>=5){
+					count2++;
 					if(!tokens[4].equals("null")){
 						String id = tokens[0];
+						count3++;
 						if(!id.equals("null")){
+							count4++;
 							String time = getHMS(tokens[4]);
 							Date dt = SDF_TS.parse(time);
 							Double lat = Double.parseDouble(tokens[2]);
 							Double lon = Double.parseDouble(tokens[3]);
-							if((dt.after(startdate))&&(dt.before(finishdate))){ //
+							if((dt.after(startdate))&&(dt.before(finishdate))){
+								count5++;
 								if(gchecker.checkOverlap(lon, lat)==true){
 									res.add(id);
 									bw.write(id);
@@ -110,6 +130,9 @@ public class ExtractDataforVictims {
 		}
 		br.close();
 		bw.close();
+		System.out.println(
+				count1+","+count2+" "+count3+" "+count4+" "+count5
+				);
 	}
 
 	public static void extract_dataofvictims(String hitdate, HashSet<String> IDofvictim, File out) throws IOException{
