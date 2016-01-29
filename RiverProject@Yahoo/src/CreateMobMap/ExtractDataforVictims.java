@@ -10,14 +10,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 import jp.ac.ut.csis.pflow.geom.GeometryChecker;
+import jp.ac.ut.csis.pflow.geom.LonLat;
 
 public class ExtractDataforVictims {
 
 	public static String basicpath = "/home/t-tyabe/Data/";
 	static File shapedir = new File(basicpath+"Kinugawa_Ibaragi_shp");
 	static GeometryChecker gchecker = new GeometryChecker(shapedir);
+	
 	protected static final SimpleDateFormat SDF_TS  = new SimpleDateFormat("HH:mm:ss");//change time format
 	protected static final SimpleDateFormat FullDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//change time format
 
@@ -116,7 +119,7 @@ public class ExtractDataforVictims {
 							Double lon = Double.parseDouble(tokens[3]);
 							if((dt.after(startdate))&&(dt.before(finishdate))){
 								count5++;
-								if(gchecker.checkOverlap(lon, lat)==true){
+								if(AreaOverlap(new LonLat(lon,lat))==true){
 									res.add(id);
 									bw.write(id);
 									bw.newLine();
@@ -165,6 +168,16 @@ public class ExtractDataforVictims {
 		bw.close();
 	}
 
+	public static Boolean AreaOverlap(LonLat point){
+		List<String> zonecodeList = gchecker.listOverlaps("A31_001",point.getLon(),point.getLat());
+		if(zonecodeList == null || zonecodeList.isEmpty()) {
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
 	public static boolean SameLogCheck(String line, String prevline){
 		if(line.equals(prevline)){
 			return false;
