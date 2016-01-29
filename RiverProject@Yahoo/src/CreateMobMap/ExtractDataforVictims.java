@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.HashSet;
 
 import jp.ac.ut.csis.pflow.geom.GeometryChecker;
-import Tools.FileHandling;
 
 public class ExtractDataforVictims {
 
@@ -37,6 +36,11 @@ public class ExtractDataforVictims {
 		String starttime = String.format("%02d", starthour)+":00:00";
 		String endtime = String.format("%02d", endhour)+":00:00";
 
+		System.out.println(
+				"Date:"+hitdate+
+				"Starttime"+starttime+
+				"Endtime"+endtime);
+		
 		if(endhour<=23){
 			NoOverlapMidnight(hitdate, starttime, endtime, victimID, dataofvictims);
 		}
@@ -47,20 +51,22 @@ public class ExtractDataforVictims {
 
 	public static void NoOverlapMidnight
 	(String hitdate, String starttime, String endtime, HashSet<String> victimID, File dataofvictims) throws IOException, ParseException{
-		FileHandling.extractfromcommand(hitdate);
+//		FileHandling.extractfromcommand(hitdate);
 		extract_writeoutIDs(hitdate,starttime,endtime,victimID);
 		extract_dataofvictims(hitdate,victimID,dataofvictims);	
 	}
 
 	public static void OverlapMidnight
 	(String hitdate, String starttime, String endtime, HashSet<String> victimID, File dataofvictims) throws IOException, ParseException{
-		FileHandling.extractfromcommand(hitdate);
+//		FileHandling.extractfromcommand(hitdate);
 		extract_writeoutIDs(hitdate,starttime,"23:59:59",victimID);
 
 		String hitdateplusone = String.valueOf(Integer.valueOf(hitdate)+1);
-		FileHandling.extractfromcommand(hitdateplusone);
+//		FileHandling.extractfromcommand(hitdateplusone);
 		extract_writeoutIDs(hitdate,"00:00:00",endtime,victimID);
 
+		System.out.println("Size of HashMap:"+victimID.size());
+		
 		extract_dataofvictims(hitdate,victimID,dataofvictims);
 		extract_dataofvictims(hitdateplusone,victimID,dataofvictims);
 
@@ -92,9 +98,9 @@ public class ExtractDataforVictims {
 							if((dt.after(startdate))&&(dt.before(finishdate))){ //
 								if(gchecker.checkOverlap(lon, lat)==true){
 									res.add(id);
+									bw.write(id);
+									bw.newLine();
 								}
-								bw.write(id);
-								bw.newLine();
 							}
 						}
 					}
