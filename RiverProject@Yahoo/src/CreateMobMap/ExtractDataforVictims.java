@@ -31,7 +31,7 @@ public class ExtractDataforVictims {
 		File dataofvictims = new File(basicpath+"gpsdataofpeopleinFloodEvent.csv");
 		//
 
-		Integer bufferhours = 4;
+		Integer bufferhours = 10;
 		
 		Integer starthour = Integer.valueOf(hittime.substring(0,2))-bufferhours;
 		Integer endhour = Integer.valueOf(hittime.substring(0,2))+bufferhours;
@@ -131,7 +131,7 @@ public class ExtractDataforVictims {
 		br.close();
 		bw.close();
 		System.out.println(
-				count1+","+count2+" "+count3+" "+count4+" "+count5
+				count1+" "+count2+" "+count3+" "+count4+" "+count5
 				);
 	}
 
