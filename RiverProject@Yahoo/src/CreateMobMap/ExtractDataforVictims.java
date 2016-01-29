@@ -14,7 +14,7 @@ import java.util.HashSet;
 import jp.ac.ut.csis.pflow.geom.GeometryChecker;
 import Tools.FileHandling;
 
-public class ExtractIDs {
+public class ExtractDataforVictims {
 
 	public static String basicpath = "/home/t-tyabe/Data/";
 	static File shapedir = new File(basicpath+"Kinugawa_Ibaragi_shp");
@@ -24,8 +24,8 @@ public class ExtractIDs {
 
 	public static void main(String args[]) throws IOException, ParseException{
 
-		String hitdate = "20140727";
-		String hittime = "10:00:00"; // XX:XX:XX shape 
+		String hitdate = "20150512";
+		String hittime = "23:30:00"; // XX:XX:XX shape 
 
 		//output boxes
 		HashSet<String> victimID = new HashSet<String>();
@@ -84,16 +84,18 @@ public class ExtractIDs {
 				if(tokens.length>=5){
 					if(!tokens[4].equals("null")){
 						String id = tokens[0];
-						String time = getHMS(tokens[4]);
-						Date dt = SDF_TS.parse(time);
-						Double lat = Double.parseDouble(tokens[2]);
-						Double lon = Double.parseDouble(tokens[3]);
-						if((dt.after(startdate))&&(dt.before(finishdate))){ //
-							if(gchecker.checkOverlap(lon, lat)==true){
-								res.add(id);
+						if(!id.equals("null")){
+							String time = getHMS(tokens[4]);
+							Date dt = SDF_TS.parse(time);
+							Double lat = Double.parseDouble(tokens[2]);
+							Double lon = Double.parseDouble(tokens[3]);
+							if((dt.after(startdate))&&(dt.before(finishdate))){ //
+								if(gchecker.checkOverlap(lon, lat)==true){
+									res.add(id);
+								}
+								bw.write(id);
+								bw.newLine();
 							}
-							bw.write(id);
-							bw.newLine();
 						}
 					}
 				}
