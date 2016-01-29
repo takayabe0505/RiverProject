@@ -20,32 +20,40 @@ public class ExtractDataforVictims {
 	public static String basicpath = "/home/t-tyabe/Data/";
 	static File shapedir = new File(basicpath+"Kinugawa_Ibaragi_shp/Kinugawa_Ibaragi_shp");
 	static GeometryChecker gchecker = new GeometryChecker(shapedir);
-	
+
 	protected static final SimpleDateFormat SDF_TS  = new SimpleDateFormat("HH:mm:ss");//change time format
 	protected static final SimpleDateFormat FullDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//change time format
 
 	public static void main(String args[]) throws IOException, ParseException{
 
-		String hitdate = "20150512";
+		/**
+		 * param are below here 
+		 */
 		String hittime = "23:30:00"; // XX:XX:XX shape 
-
-		//output boxes
-		HashSet<String> victimID = new HashSet<String>();
-		File dataofvictims = new File(basicpath+"gpsdataofpeopleinFloodEvent.csv");
-		//
-
 		Integer bufferhours = 3;
 		
+		String hitdate = "20150512";
+		HashSet<String> victimID = new HashSet<String>();
+		run(hitdate, hittime, victimID, bufferhours);
+		
+		String hitdate2 = "20150512";
+		HashSet<String> victimID2 = new HashSet<String>();
+		run(hitdate2, hittime, victimID2, bufferhours);
+
+	}
+	
+	public static void run(String hitdate, String hittime, HashSet<String> victimID, Integer bufferhours) throws IOException, ParseException{	
+
+		File dataofvictims = new File(basicpath+"gpsdataofpeopleinFloodEvent_"+hitdate+".csv");
+
 		Integer starthour = Integer.valueOf(hittime.substring(0,2))-bufferhours;
 		Integer endhour = Integer.valueOf(hittime.substring(0,2))+bufferhours;
 		String starttime = String.format("%02d", starthour)+":00:00";
 		String endtime = String.format("%02d", endhour)+":00:00";
-		
+
 		System.out.println(
-				"Date: "+hitdate+" "+
-				"Starttime: "+starttime+" "+
-				"Endtime: "+endtime);
-		
+				"Date: "+hitdate+" "+"Starttime: "+starttime+" "+"Endtime: "+endtime);
+
 		if(endhour<=23){
 			NoOverlapMidnight(hitdate, starttime, endtime, victimID, dataofvictims);
 		}
@@ -56,25 +64,25 @@ public class ExtractDataforVictims {
 
 	public static void NoOverlapMidnight
 	(String hitdate, String starttime, String endtime, HashSet<String> victimID, File dataofvictims) throws IOException, ParseException{
-//		FileHandling.extractfromcommand(hitdate);
+		//		FileHandling.extractfromcommand(hitdate);
 		extract_writeoutIDs(hitdate,starttime,endtime,victimID);
 		extract_dataofvictims(hitdate,victimID,dataofvictims);	
 	}
 
 	public static void OverlapMidnight
 	(String hitdate, String starttime, String endtime, HashSet<String> victimID, File dataofvictims) throws IOException, ParseException{
-//		FileHandling.extractfromcommand(hitdate);
+		//		FileHandling.extractfromcommand(hitdate);
 		extract_writeoutIDs(hitdate,starttime,"23:59:59",victimID);
 
 		String hitdateplusone = String.valueOf(Integer.valueOf(hitdate)+1); // move 1 day forward
-//		FileHandling.extractfromcommand(hitdateplusone); //uncompress 1 day forward day
-		
+		//		FileHandling.extractfromcommand(hitdateplusone); //uncompress 1 day forward day
+
 		Integer endhour = Integer.valueOf(endtime.substring(0, 2));
 		String newend = String.format("%02d", endhour-24)+":00:00";
 		extract_writeoutIDs(hitdate,"00:00:00",newend,victimID);
 
 		System.out.println("Size of HashMap:"+victimID.size());
-		
+
 		extract_dataofvictims(hitdate,victimID,dataofvictims);
 		extract_dataofvictims(hitdateplusone,victimID,dataofvictims);
 
@@ -90,9 +98,9 @@ public class ExtractDataforVictims {
 		BufferedReader br = new BufferedReader(new FileReader(gpslogs));
 		String line = null;
 		String prevline = null;
-		
+
 		int count6 = 0;
-		
+
 		while((line=br.readLine())!=null){
 			if(SameLogCheck(line,prevline)==true){
 				String[] tokens = line.split("\t");
@@ -159,7 +167,7 @@ public class ExtractDataforVictims {
 			return "yes";
 		}
 	}
-	
+
 	public static boolean SameLogCheck(String line, String prevline){
 		if(line.equals(prevline)){
 			return false;
