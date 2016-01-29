@@ -34,8 +34,8 @@ public class ExtractDataforVictims {
 
 		Integer starthour = Integer.valueOf(hittime.substring(0, 2))-3;
 		Integer endhour = Integer.valueOf(hittime.substring(0, 2))+3;
-		String starttime = String.format("&02d", starthour)+":00:00";
-		String endtime = String.format("&02d", endhour)+":00:00";
+		String starttime = String.format("%02d", starthour)+":00:00";
+		String endtime = String.format("%02d", endhour)+":00:00";
 
 		if(endhour<=23){
 			NoOverlapMidnight(hitdate, starttime, endtime, victimID, dataofvictims);
