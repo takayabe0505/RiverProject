@@ -18,7 +18,7 @@ public class testOverlap {
 		Double lon = 139.71931458;
 		Double lat =  36.14314262;
 		
-		if(AreaOverlap(new LonLat(lon,lat)).equals(true)){
+		if(AreaOverlap(new LonLat(lon,lat)).equals("yes")){
 			System.out.println("yeah");
 		}
 		else{
@@ -26,13 +26,13 @@ public class testOverlap {
 		}
 	}
 	
-	public static Boolean AreaOverlap(LonLat point){
+	public static String AreaOverlap(LonLat point){
 		List<String> zonecodeList = gchecker.listOverlaps("A31_001",point.getLon(),point.getLat());
 		if(zonecodeList == null || zonecodeList.isEmpty()) {
-			return false;
+			return "no";
 		}
 		else{
-			return true;
+			return "yes";
 		}
 	}
 	

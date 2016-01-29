@@ -123,7 +123,7 @@ public class ExtractDataforVictims {
 							}
 							if((dt.after(startdate))&&(dt.before(finishdate))){
 								count5++;
-								if(AreaOverlap(new LonLat(lon,lat)).equals(true)){
+								if(AreaOverlap(new LonLat(lon,lat)).equals("yes")){
 									res.add(id);
 									bw.write(id);
 									bw.newLine();
@@ -173,13 +173,13 @@ public class ExtractDataforVictims {
 		bw.close();
 	}
 
-	public static Boolean AreaOverlap(LonLat point){
+	public static String AreaOverlap(LonLat point){
 		List<String> zonecodeList = gchecker.listOverlaps("A31_001",point.getLon(),point.getLat());
 		if(zonecodeList == null || zonecodeList.isEmpty()) {
-			return false;
+			return "no";
 		}
 		else{
-			return true;
+			return "yes";
 		}
 	}
 	
