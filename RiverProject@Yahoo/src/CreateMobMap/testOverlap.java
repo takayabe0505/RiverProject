@@ -18,7 +18,7 @@ public class testOverlap {
 		Double lon = 139.71931458;
 		Double lat =  36.14314262;
 		
-		if(AreaOverlap(new LonLat(lon,lat))==true){
+		if(AreaOverlap(new LonLat(lon,lat)).equals(true)){
 			System.out.println("yeah");
 		}
 		else{

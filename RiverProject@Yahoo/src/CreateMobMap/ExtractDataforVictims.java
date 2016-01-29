@@ -123,7 +123,7 @@ public class ExtractDataforVictims {
 							}
 							if((dt.after(startdate))&&(dt.before(finishdate))){
 								count5++;
-								if(AreaOverlap(new LonLat(lon,lat))==true){
+								if(AreaOverlap(new LonLat(lon,lat)).equals(true)){
 									res.add(id);
 									bw.write(id);
 									bw.newLine();
