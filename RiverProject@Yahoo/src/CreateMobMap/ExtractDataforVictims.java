@@ -99,7 +99,7 @@ public class ExtractDataforVictims {
 		int count3 = 0;
 		int count4 = 0;
 		int count5 = 0;
-		
+		int count6 = 0;
 		//
 		
 		while((line=br.readLine())!=null){
@@ -117,12 +117,17 @@ public class ExtractDataforVictims {
 							Date dt = SDF_TS.parse(time);
 							Double lat = Double.parseDouble(tokens[2]);
 							Double lon = Double.parseDouble(tokens[3]);
+							if(count4%10000==0){
+								bw.write(tokens[3]+","+tokens[2]);
+								bw.newLine();
+							}
 							if((dt.after(startdate))&&(dt.before(finishdate))){
 								count5++;
 								if(AreaOverlap(new LonLat(lon,lat))==true){
 									res.add(id);
 									bw.write(id);
 									bw.newLine();
+									count6++;
 								}
 							}
 						}
@@ -134,7 +139,7 @@ public class ExtractDataforVictims {
 		br.close();
 		bw.close();
 		System.out.println(
-				count1+" "+count2+" "+count3+" "+count4+" "+count5
+				count1+" "+count2+" "+count3+" "+count4+" "+count5+" "+count6
 				);
 	}
 
