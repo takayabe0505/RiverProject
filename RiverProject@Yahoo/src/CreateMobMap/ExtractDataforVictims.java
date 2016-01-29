@@ -34,7 +34,7 @@ public class ExtractDataforVictims {
 		File dataofvictims = new File(basicpath+"gpsdataofpeopleinFloodEvent.csv");
 		//
 
-		Integer bufferhours = 10;
+		Integer bufferhours = 3;
 		
 		Integer starthour = Integer.valueOf(hittime.substring(0,2))-bufferhours;
 		Integer endhour = Integer.valueOf(hittime.substring(0,2))+bufferhours;
@@ -42,9 +42,9 @@ public class ExtractDataforVictims {
 		String endtime = String.format("%02d", endhour)+":00:00";
 		
 		System.out.println(
-				"Date:"+hitdate+" "+
-				"Starttime"+starttime+" "+
-				"Endtime"+endtime);
+				"Date: "+hitdate+" "+
+				"Starttime: "+starttime+" "+
+				"Endtime: "+endtime);
 		
 		if(endhour<=23){
 			NoOverlapMidnight(hitdate, starttime, endtime, victimID, dataofvictims);
@@ -87,46 +87,26 @@ public class ExtractDataforVictims {
 		Date startdate = SDF_TS.parse(start);
 		Date finishdate = SDF_TS.parse(end);
 
-		File output  = new File("/home/t-tyabe/Data/IDofpeopleinFloodEvent.csv");
 		BufferedReader br = new BufferedReader(new FileReader(gpslogs));
-		BufferedWriter bw = new BufferedWriter(new FileWriter(output,true));
 		String line = null;
 		String prevline = null;
 		
-		// to delete after check
-		int count1 = 0;
-		int count2 = 0;
-		int count3 = 0;
-		int count4 = 0;
-		int count5 = 0;
 		int count6 = 0;
-		//
 		
 		while((line=br.readLine())!=null){
 			if(SameLogCheck(line,prevline)==true){
-				count1++;
 				String[] tokens = line.split("\t");
 				if(tokens.length>=5){
-					count2++;
 					if(!tokens[4].equals("null")){
 						String id = tokens[0];
-						count3++;
 						if(!id.equals("null")){
-							count4++;
 							String time = getHMS(tokens[4]);
 							Date dt = SDF_TS.parse(time);
 							Double lat = Double.parseDouble(tokens[2]);
 							Double lon = Double.parseDouble(tokens[3]);
-							if(count4%10000==0){
-								bw.write(tokens[3]+","+tokens[2]);
-								bw.newLine();
-							}
 							if((dt.after(startdate))&&(dt.before(finishdate))){
-								count5++;
 								if(AreaOverlap(new LonLat(lon,lat)).equals("yes")){
 									res.add(id);
-									bw.write(id);
-									bw.newLine();
 									count6++;
 								}
 							}
@@ -137,10 +117,7 @@ public class ExtractDataforVictims {
 			}
 		}
 		br.close();
-		bw.close();
-		System.out.println(
-				count1+" "+count2+" "+count3+" "+count4+" "+count5+" "+count6
-				);
+		System.out.println("number of IDs are: "+count6);
 	}
 
 	public static void extract_dataofvictims(String hitdate, HashSet<String> IDofvictim, File out) throws IOException{
@@ -161,7 +138,7 @@ public class ExtractDataforVictims {
 						Double lat = Double.parseDouble(tokens[2]);
 						Double lon = Double.parseDouble(tokens[3]);
 						if(IDofvictim.contains(id)){ 
-							bw.write(id + "\t" + lat + "\t" + lon + "\t" + ftime);
+							bw.write(id + "," + lon + "," + lat + "," + ftime);
 							bw.newLine();
 						}
 					}
