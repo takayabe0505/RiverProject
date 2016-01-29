@@ -9,9 +9,8 @@ import jp.ac.ut.csis.pflow.geom.LonLat;
 public class testOverlap {
 
 	public static String basicpath = "/home/t-tyabe/Data/";
-	static File shapedir = new File(basicpath+"Kinugawa_Ibaragi_shp");
+	static File shapedir = new File(basicpath+"Kinugawa_Ibaragi_shp/Kinugawa_Ibaragi_shp");
 	static GeometryChecker gchecker = new GeometryChecker(shapedir);
-
 	
 	public static void main(String args[]){
 		

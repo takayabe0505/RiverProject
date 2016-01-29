@@ -18,7 +18,7 @@ import jp.ac.ut.csis.pflow.geom.LonLat;
 public class ExtractDataforVictims {
 
 	public static String basicpath = "/home/t-tyabe/Data/";
-	static File shapedir = new File(basicpath+"Kinugawa_Ibaragi_shp");
+	static File shapedir = new File(basicpath+"Kinugawa_Ibaragi_shp/Kinugawa_Ibaragi_shp");
 	static GeometryChecker gchecker = new GeometryChecker(shapedir);
 	
 	protected static final SimpleDateFormat SDF_TS  = new SimpleDateFormat("HH:mm:ss");//change time format
