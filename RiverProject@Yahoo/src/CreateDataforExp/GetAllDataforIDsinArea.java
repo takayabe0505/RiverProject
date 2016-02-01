@@ -27,6 +27,7 @@ public class GetAllDataforIDsinArea {
 //			FileHandling.extractfromcommand(date);
 			File gpslogs = new File(basicpath+"grid/0/tmp/ktsubouc/gps_"+date+".csv");	
 			ReadoutOnlyLogsofID(gpslogs,out,IDset);
+			System.out.println("done"+date);
 		}
 	}
 
