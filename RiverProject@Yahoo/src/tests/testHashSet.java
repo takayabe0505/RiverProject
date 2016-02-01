@@ -1,4 +1,4 @@
-package CreateMobMap;
+package tests;
 
 import java.util.HashSet;
 

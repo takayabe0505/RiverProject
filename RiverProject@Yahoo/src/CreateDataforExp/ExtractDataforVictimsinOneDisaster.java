@@ -1,4 +1,4 @@
-package CreateMobMap;
+package CreateDataforExp;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,7 +15,7 @@ import java.util.List;
 import jp.ac.ut.csis.pflow.geom.GeometryChecker;
 import jp.ac.ut.csis.pflow.geom.LonLat;
 
-public class ExtractDataforVictims {
+public class ExtractDataforVictimsinOneDisaster {
 
 	public static String basicpath = "/home/t-tyabe/Data/";
 	static File shapedir = new File(basicpath+"Kinugawa_Ibaragi_shp/Kinugawa_Ibaragi_shp");
