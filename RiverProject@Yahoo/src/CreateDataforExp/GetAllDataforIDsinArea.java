@@ -43,7 +43,7 @@ public class GetAllDataforIDsinArea {
 
 	public static void ReadoutOnlyLogsofID(File in, File out, HashSet<String> ids) throws IOException, ParseException{
 		BufferedReader br = new BufferedReader(new FileReader(in));
-		BufferedWriter bw = new BufferedWriter(new FileWriter(out));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(out,true));
 		String line = null;
 		String prevline = null;
 		while((line=br.readLine())!=null){
