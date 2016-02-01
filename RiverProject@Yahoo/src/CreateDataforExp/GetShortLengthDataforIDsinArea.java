@@ -11,17 +11,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 
-import Tools.FileHandling;
-
 public class GetShortLengthDataforIDsinArea {
 
 	public static String basicpath = "/home/t-tyabe/Data/";
 	protected static final SimpleDateFormat HMS  = new SimpleDateFormat("HH:mm:ss");//change time format
-	public static Integer bufferhours = 3;
+	public static Integer bufferhours = 6;
 
 	public static void main(String args[]) throws ParseException, IOException{
-		String hitdate = "20150512";
-		String hittime = "23:50:00";
+		String hitdate = "20150910";
+		String hittime = "12:50:00";
 		File IDFile = new File(basicpath+"IDswithhomesinArea.csv");
 		run(hitdate, hittime, IDFile);
 	}
@@ -31,7 +29,7 @@ public class GetShortLengthDataforIDsinArea {
 		HashSet<String> IDset = getIDMap(IDfile);
 		File out = new File(basicpath+"logsofIDwithhomesinArea"+hitdate+"_limitedtimerange.csv");
 		for(String date : targetDates){
-			FileHandling.extractfromcommand(hitdate);
+//			FileHandling.extractfromcommand(date);
 			File gpslogs = new File(basicpath+"grid/0/tmp/ktsubouc/gps_"+date+".csv");	
 			ReadoutOnlyLogsofID(gpslogs,out,IDset,hittime);
 		}

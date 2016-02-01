@@ -9,14 +9,12 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashSet;
 
-import Tools.FileHandling;
-
 public class GetAllDataforIDsinArea {
 
 	public static String basicpath = "/home/t-tyabe/Data/";
 
 	public static void main(String args[]) throws ParseException, IOException{
-		String hitdate = "20150512";
+		String hitdate = "20150910";
 		File IDFile = new File(basicpath+"IDswithhomesinArea.csv");
 		run(hitdate,IDFile);
 	}
@@ -26,7 +24,7 @@ public class GetAllDataforIDsinArea {
 		HashSet<String> IDset = getIDMap(IDfile);
 		File out = new File(basicpath+"logsofIDwithhomesinArea"+hitdate+".csv");
 		for(String date : targetDates){
-			FileHandling.extractfromcommand(hitdate);
+//			FileHandling.extractfromcommand(date);
 			File gpslogs = new File(basicpath+"grid/0/tmp/ktsubouc/gps_"+date+".csv");	
 			ReadoutOnlyLogsofID(gpslogs,out,IDset);
 		}
