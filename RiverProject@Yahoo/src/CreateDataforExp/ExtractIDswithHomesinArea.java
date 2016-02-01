@@ -38,9 +38,10 @@ public class ExtractIDswithHomesinArea {
 	
 	public static void run(String hitdate, HashMap<String, Integer> ids, Integer min) throws ParseException, IOException{
 		HashSet<String> targetDates = getTargetDates(hitdate);
+		System.out.println(targetDates);
 		
 		for(String date : targetDates){
-			FileHandling.extractfromcommand(hitdate);
+			FileHandling.extractfromcommand(date);
 			File gpslogs = new File(basicpath+"grid/0/tmp/ktsubouc/gps_"+date+".csv");	
 			ReadoutOnlyNightLogs(gpslogs,ids);
 		}
