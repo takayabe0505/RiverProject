@@ -73,11 +73,11 @@ public class ExtractIDswithHomesinArea {
 		String month = disDate.substring(4,6);
 		for(int i=1; i<=28; i++){
 			String day = String.valueOf(i);
+			String strdate = year+month+day;
 			Date d = YMD.parse(year+"-"+month+"-"+day);
 			String youbi = (new SimpleDateFormat("u")).format(d);
 			if(!((youbi.equals("6"))||(youbi.equals("7")))){
-					String date = YMD.format(d);
-					res.add(date);
+					res.add(strdate);
 			}
 		}
 		return res;
