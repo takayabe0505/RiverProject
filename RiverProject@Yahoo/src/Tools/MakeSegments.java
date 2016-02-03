@@ -70,15 +70,23 @@ public class MakeSegments {
 				}
 
 			}
-			else if(level.equals("2")){
-				bw.write("7,"+diff);
-				bw.newLine();
-				count7++;				
+			else if(level.equals("2")){		
+				if((hittime>ht)&&(hittime<ht2)){
+					if((normaltime>normal)&&(normaltime<normal2)){
+						bw.write("7,"+diff);
+						bw.newLine();
+						count7++;
+					}
+				}
 			}
 			else{
-				bw.write("8,"+diff);
-				bw.newLine();
-				count8++;
+				if((hittime>ht)&&(hittime<ht2)){
+					if((normaltime>normal)&&(normaltime<normal2)){
+						bw.write("8,"+diff);
+						bw.newLine();
+						count8++;	
+					}
+				}
 			}
 			bw.write("1,"+diff);
 			bw.newLine();
