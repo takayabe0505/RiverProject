@@ -48,15 +48,15 @@ public class MakeSegments {
 				bw.write("2,"+diff);
 				bw.newLine();
 				count2++;
-				if((hittime>ht)&&(hittime<ht2)){
+				if((hittime>=ht)&&(hittime<=ht2)){
 					bw.write("3,"+diff);
 					bw.newLine();
 					count3++;
-					if((normaltime>normal)&&(normaltime<normal2)){
+					if((normaltime>=normal)&&(normaltime<=normal2)){
 						bw.write("4,"+diff);
 						bw.newLine();
 						count4++;
-						if(normalbunsan>bunsan){
+						if(normalbunsan>=bunsan){
 							bw.write("5,"+diff);
 							bw.newLine();
 							count5++;
@@ -71,8 +71,8 @@ public class MakeSegments {
 
 			}
 			else if(level.equals("2")){		
-				if((hittime>ht)&&(hittime<ht2)){
-					if((normaltime>normal)&&(normaltime<normal2)){
+				if((hittime>=ht)&&(hittime<=ht2)){
+					if((normaltime>=normal)&&(normaltime<=normal2)){
 						bw.write("7,"+diff);
 						bw.newLine();
 						count7++;
@@ -80,8 +80,8 @@ public class MakeSegments {
 				}
 			}
 			else{
-				if((hittime>ht)&&(hittime<ht2)){
-					if((normaltime>normal)&&(normaltime<normal2)){
+				if((hittime>=ht)&&(hittime<=ht2)){
+					if((normaltime>=normal)&&(normaltime<=normal2)){
 						bw.write("8,"+diff);
 						bw.newLine();
 						count8++;	
