@@ -90,14 +90,14 @@ public class MovementLength {
 		BufferedReader br = new BufferedReader(new FileReader(in));
 		String line = null;
 		while((line=br.readLine())!=null){
-			String[] tokens = line.split("\t");
+			String[] tokens = line.split(",");
 			String id = tokens[0];		
 			if(ids.contains(id)){
 				Integer time = getonlytimeinsecs(tokens[3]);
 				String date = getonlydate(tokens[3]);
 
-				Double lat = Double.parseDouble(tokens[1]);
-				Double lon = Double.parseDouble(tokens[2]);
+				Double lat = Double.parseDouble(tokens[2]);
+				Double lon = Double.parseDouble(tokens[1]);
 				LonLat p = new LonLat(lon,lat);
 				if(res.containsKey(date)){
 					if(res.get(date).containsKey(id)){
