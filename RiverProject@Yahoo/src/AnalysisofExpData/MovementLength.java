@@ -22,11 +22,11 @@ public class MovementLength {
 
 	public static void main(String args[]) throws IOException{
 
-		File IDFile = new File(basicpath+"IDswithhomesinArea.csv");
+		File IDFile = new File(basicpath+"id_home_real.csv");
 		HashSet<String> IDs = getIDs(IDFile);
 		System.out.println("got IDs:" + IDs.size());
 
-		File res = new File(basicpath+"flood_length.csv");
+		File res = new File(basicpath+"flood_length2.csv");
 		BufferedWriter bw = new BufferedWriter(new FileWriter(res,true));
 
 		File in = new File(basicpath+"logsofIDwithhomesinArea20150910_from07.csv");
