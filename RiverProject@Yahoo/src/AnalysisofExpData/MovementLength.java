@@ -26,10 +26,10 @@ public class MovementLength {
 		HashSet<String> IDs = getIDs(IDFile);
 		System.out.println("got IDs:" + IDs.size());
 
-		File res = new File(basicpath+"flood_length2.csv");
+		File res = new File(basicpath+"flood_length3.csv");
 		BufferedWriter bw = new BufferedWriter(new FileWriter(res,true));
 
-		File in = new File(basicpath+"logsofIDwithhomesinArea20150910_from07.csv");
+		File in = new File(basicpath+"logsofIDwithhomesinArea20150910.csv");
 		HashMap<String, HashMap<String, HashMap<Integer,LonLat>>> alldata = getallData(in,IDs);
 		System.out.println("size of map:" +alldata.size());
 		for(String date : alldata.keySet()){
