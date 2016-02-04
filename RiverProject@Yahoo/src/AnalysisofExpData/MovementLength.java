@@ -28,7 +28,7 @@ public class MovementLength {
 
 		File res = new File(basicpath+"flood_length.csv");
 		BufferedWriter bw = new BufferedWriter(new FileWriter(res,true));
-		
+
 		File in = new File(basicpath+"logsofIDwithhomesinArea20150910_from07.csv");
 		HashMap<String, HashMap<String, HashMap<Integer,LonLat>>> alldata = getallData(in,IDs);
 		System.out.println("size of map:" +alldata.size());
@@ -71,7 +71,7 @@ public class MovementLength {
 		//		System.out.println("total length: "+ res);
 		return lengthsum/1000d;
 	}
-	
+
 	public static HashSet<String> getIDs(File in) throws IOException{
 		HashSet<String> targetIDs = new HashSet<String>();
 		BufferedReader br = new BufferedReader(new FileReader(in));
@@ -91,34 +91,30 @@ public class MovementLength {
 		String line = null;
 		while((line=br.readLine())!=null){
 			String[] tokens = line.split("\t");
-			if(tokens.length>=5){
-				if(!tokens[4].equals("null")){
-					String id = tokens[0];		
-					if(ids.contains(id)){
-						Integer time = getonlytimeinsecs(tokens[4]);
-						String date = getonlydate(tokens[4]);
+			String id = tokens[0];		
+			if(ids.contains(id)){
+				Integer time = getonlytimeinsecs(tokens[3]);
+				String date = getonlydate(tokens[3]);
 
-						Double lat = Double.parseDouble(tokens[2]);
-						Double lon = Double.parseDouble(tokens[3]);
-						LonLat p = new LonLat(lon,lat);
-						if(res.containsKey(date)){
-							if(res.get(date).containsKey(id)){
-								res.get(date).get(id).put(time, p);
-							}
-							else{
-								HashMap<Integer,LonLat> temp = new HashMap<Integer,LonLat>();
-								temp.put(time, p);
-								res.get(date).put(id, temp);
-							}
-						}
-						else{
-							HashMap<Integer,LonLat> temp = new HashMap<Integer,LonLat>();
-							temp.put(time, p);
-							HashMap<String, HashMap<Integer,LonLat>> tmp2 = new HashMap<String, HashMap<Integer,LonLat>>();
-							tmp2.put(id, temp);
-							res.put(date, tmp2);
-						}
+				Double lat = Double.parseDouble(tokens[1]);
+				Double lon = Double.parseDouble(tokens[2]);
+				LonLat p = new LonLat(lon,lat);
+				if(res.containsKey(date)){
+					if(res.get(date).containsKey(id)){
+						res.get(date).get(id).put(time, p);
 					}
+					else{
+						HashMap<Integer,LonLat> temp = new HashMap<Integer,LonLat>();
+						temp.put(time, p);
+						res.get(date).put(id, temp);
+					}
+				}
+				else{
+					HashMap<Integer,LonLat> temp = new HashMap<Integer,LonLat>();
+					temp.put(time, p);
+					HashMap<String, HashMap<Integer,LonLat>> tmp2 = new HashMap<String, HashMap<Integer,LonLat>>();
+					tmp2.put(id, temp);
+					res.put(date, tmp2);
 				}
 			}
 		}
