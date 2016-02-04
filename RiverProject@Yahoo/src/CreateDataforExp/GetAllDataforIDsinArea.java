@@ -15,7 +15,7 @@ public class GetAllDataforIDsinArea {
 
 	public static void main(String args[]) throws ParseException, IOException{
 		String hitdate = "20150910";
-		File IDFile = new File(basicpath+"IDswithhomesinArea.csv");
+		File IDFile = new File(basicpath+"id_home_real.csv");
 		run(hitdate,IDFile);
 	}
 
