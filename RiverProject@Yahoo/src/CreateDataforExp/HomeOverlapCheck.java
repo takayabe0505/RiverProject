@@ -35,8 +35,8 @@ public class HomeOverlapCheck {
 		while((line=br.readLine())!=null){
 			String[] tokens = line.split("\t");
 			String id = tokens[0];
-			Double lat = Double.parseDouble(tokens[2]);
-			Double lon = Double.parseDouble(tokens[3]);
+			Double lat = Double.parseDouble(tokens[1]);
+			Double lon = Double.parseDouble(tokens[2]);
 			if(AreaOverlap(new LonLat(lon,lat)).equals("yes")){
 				bw.write(id);
 				bw.newLine();
