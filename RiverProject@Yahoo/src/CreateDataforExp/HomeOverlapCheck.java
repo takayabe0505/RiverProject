@@ -38,7 +38,7 @@ public class HomeOverlapCheck {
 			Double lat = Double.parseDouble(tokens[1]);
 			Double lon = Double.parseDouble(tokens[2]);
 			if(AreaOverlap(new LonLat(lon,lat)).equals("yes")){
-				bw.write(id);
+				bw.write(id+","+lon+","+lat);
 				bw.newLine();
 			}
 
