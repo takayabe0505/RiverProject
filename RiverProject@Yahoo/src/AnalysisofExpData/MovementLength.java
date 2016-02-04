@@ -123,7 +123,7 @@ public class MovementLength {
 	}
 
 	public static Integer getonlytimeinsecs(String t){
-		String[] x = t.split("T");
+		String[] x = t.split(" ");
 		String time = x[1].substring(0,8);
 		Integer hour = Integer.valueOf(time.split(":")[0]);
 		Integer mins = Integer.valueOf(time.split(":")[1]);
@@ -133,7 +133,7 @@ public class MovementLength {
 	}
 
 	public static String getonlydate(String t){
-		String[] x = t.split("T");
+		String[] x = t.split(" ");
 		String date = x[0];
 		return date;
 	}
