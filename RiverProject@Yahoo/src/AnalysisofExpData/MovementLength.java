@@ -33,12 +33,16 @@ public class MovementLength {
 		HashMap<String, HashMap<String, HashMap<Integer,LonLat>>> alldata = getallData(in,IDs);
 		System.out.println("size of map:" +alldata.size());
 		for(String date : alldata.keySet()){
+			String day = date.split("-")[2];
+			String intday = String.valueOf(Integer.valueOf(day));
 			for(String id : alldata.get(date).keySet()){
 				Double distance = calculateLength(alldata.get(date).get(id));
 				String points = String.valueOf(alldata.get(date).get(id).size());
 				String strdis = String.valueOf(distance);
-				bw.write(id + "," + date + "," + strdis + "," + points);
-				bw.newLine();
+				if(distance<1000d){
+					bw.write(id + "," + intday + "," + strdis + "," + points);
+					bw.newLine();
+				}
 			}
 		}
 		bw.close();
