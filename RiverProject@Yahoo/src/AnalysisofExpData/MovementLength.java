@@ -18,7 +18,7 @@ import jp.ac.ut.csis.pflow.geom.LonLat;
 
 public class MovementLength {
 
-	public static String basicpath = "/home/t-tyabe/Data/";
+	public static String basicpath = "/home/t-tyabe/Data/KinugawaFlood/";
 
 	public static void main(String args[]) throws IOException{
 
