@@ -21,7 +21,7 @@ public class MakeSegments {
 	public static void main(String args[]) throws IOException{
 
 		File in = new File(basicpath+"office_exit_diff_rain_final.csv");
-		File out = new File(basicpath+"segment_ver1.csv");
+		File out = new File(basicpath+"segment_ver2.csv");
 
 		BufferedReader br = new BufferedReader(new FileReader(in));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(out));
@@ -42,37 +42,29 @@ public class MakeSegments {
 			Double normaltime = Double.parseDouble(ts[5]);
 			Double normalbunsan = Double.parseDouble(ts[6]);
 			//			Double disastertime = Double.parseDouble(ts[7]);
-			//			Double distance = Double.parseDouble(ts[8])*100;
+			Double distance = Double.parseDouble(ts[8])*100;
 
 			if((hittime>=ht)&&(hittime<=ht2)){
-			
-				bw.write(level+","+diff);
+				bw.write("1,"+diff);
 				bw.newLine();
-				
-				
-				count3++;
-//				if((normaltime>=normal)&&(normaltime<=normal2)){
-//					bw.write("4,"+diff);
-//					bw.newLine();
-//					count4++;
-//					if(normalbunsan>=bunsan){
-//						bw.write("5,"+diff);
-//						bw.newLine();
-//						count5++;
-//					}
-//					else{
-//						bw.write("6,"+diff);
-//						bw.newLine();
-//						count6++;
-//					}
-//				}
-
+				if(level.equals("4")){
+					bw.write("2,"+diff);
+					bw.newLine();
+					if((normaltime>=normal)&&(normaltime<=normal2)){
+						bw.write("3,"+diff);
+						bw.newLine();
+						if(distance>40){
+							bw.write("4,"+diff);
+							bw.newLine();
+						}
+					}
+				}
 
 			}
-			
-//			bw.write("1,"+diff);
-//			bw.newLine();
-//			count1++;
+
+			//			bw.write("1,"+diff);
+			//			bw.newLine();
+			//			count1++;
 		}
 		bw.close();
 		br.close();
