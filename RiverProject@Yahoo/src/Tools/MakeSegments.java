@@ -14,8 +14,8 @@ public class MakeSegments {
 	public static String lvl = "3";
 	public static Double ht  = 17d;
 	public static Double ht2  = 22d;
-	public static Double normal = 18d;
-	public static Double normal2 = 22d;
+	public static Double normal = 16d;
+	public static Double normal2 = 20d;
 	public static Double bunsan = 1.5d;
 
 	public static void main(String args[]) throws IOException{
