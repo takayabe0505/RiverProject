@@ -53,10 +53,14 @@ public class MakeSegments {
 					if((normaltime>=normal)&&(normaltime<=normal2)){
 						bw.write("3,"+diff);
 						bw.newLine();
-						if(distance>40){
-							bw.write("4,"+diff);
-							bw.newLine();
-						}
+					}
+					else if(normaltime<=normal){
+						bw.write("4,"+diff);
+						bw.newLine();
+					}
+					else if(normaltime>=normal2){
+						bw.write("5,"+diff);
+						bw.newLine();
 					}
 				}
 
