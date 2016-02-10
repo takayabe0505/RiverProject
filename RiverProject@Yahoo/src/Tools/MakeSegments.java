@@ -21,18 +21,15 @@ public class MakeSegments {
 	public static void main(String args[]) throws IOException{
 
 		File in = new File(basicpath+"office_exit_diff_rain_final.csv");
-		File out = new File(basicpath+"segment_ver2.csv");
+		File out = new File(basicpath+"rain_level1and4.csv");
 
 		BufferedReader br = new BufferedReader(new FileReader(in));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(out));
 		String line = null;
 
-		int count1 = 0;
-		int count2 = 0;
-		int count3 = 0;
-		int count4 = 0;
-		int count5 = 0;
-		int count6 = 0;int count7 = 0;int count8 = 0;
+		int count1 = 0; int count2 = 0;
+		int count3 = 0; int count4 = 0; int count5 = 0;
+		int count6 = 0; int count7 = 0; int count8 = 0;
 
 		while((line=br.readLine())!=null){
 			String[] ts = line.split(",");
@@ -63,12 +60,11 @@ public class MakeSegments {
 						bw.newLine();
 					}
 				}
-
+				else if (level.equals("1")){
+					bw.write("6, " + diff);
+					bw.newLine();
+				}
 			}
-
-			//			bw.write("1,"+diff);
-			//			bw.newLine();
-			//			count1++;
 		}
 		bw.close();
 		br.close();
@@ -83,5 +79,4 @@ public class MakeSegments {
 		System.out.println("8:"+count8);
 
 	}
-
 }
