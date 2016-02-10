@@ -42,26 +42,34 @@ public class MakeSegments {
 			Double distance = Double.parseDouble(ts[8])*100;
 
 			if((hittime>=ht)&&(hittime<=ht2)){
-				bw.write("1,"+diff);
-				bw.newLine();
+//				bw.write("1,"+diff);
+//				bw.newLine();
 				if(level.equals("4")){
 					bw.write("2,"+diff);
 					bw.newLine();
-					if((normaltime>=normal)&&(normaltime<=normal2)){
-						bw.write("3,"+diff);
-						bw.newLine();
-					}
-					else if(normaltime<=normal){
-						bw.write("4,"+diff);
-						bw.newLine();
-					}
-					else if(normaltime>=normal2){
-						bw.write("5,"+diff);
-						bw.newLine();
-					}
+//					if((normaltime>=normal)&&(normaltime<=normal2)){
+//						bw.write("3,"+diff);
+//						bw.newLine();
+//					}
+//					else if(normaltime<=normal){
+//						bw.write("4,"+diff);
+//						bw.newLine();
+//					}
+//					else if(normaltime>=normal2){
+//						bw.write("5,"+diff);
+//						bw.newLine();
+//					}
 				}
 				else if (level.equals("1")){
-					bw.write("6, " + diff);
+					bw.write("1, " + diff);
+					bw.newLine();
+				}
+				else if (level.equals("2")){
+					bw.write("2, " + diff);
+					bw.newLine();
+				}
+				else if (level.equals("3")){
+					bw.write("3, " + diff);
 					bw.newLine();
 				}
 			}
