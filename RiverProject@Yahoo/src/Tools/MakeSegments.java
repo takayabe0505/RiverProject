@@ -45,7 +45,7 @@ public class MakeSegments {
 //				bw.write("1,"+diff);
 //				bw.newLine();
 				if(level.equals("4")){
-					bw.write("2,"+diff);
+					bw.write("4,"+diff);
 					bw.newLine();
 //					if((normaltime>=normal)&&(normaltime<=normal2)){
 //						bw.write("3,"+diff);
