@@ -20,8 +20,8 @@ public class MakeSegments {
 
 	public static void main(String args[]) throws IOException{
 
-		File in = new File(basicpath+"office_exit_diff_emg1_final.csv");
-		File out = new File(basicpath+"eq_levels2.csv");
+		File in = new File(basicpath+"office_exit_diff_rain_final.csv");
+		File out = new File(basicpath+"rain_levels2.csv");
 
 		BufferedReader br = new BufferedReader(new FileReader(in));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(out));
@@ -45,7 +45,7 @@ public class MakeSegments {
 				//				bw.write("1,"+diff);
 				//				bw.newLine();
 				if(level.equals("4")){
-					bw.write(line);
+					bw.write("4, " + diff);
 					bw.newLine();
 					//					if((normaltime>=normal)&&(normaltime<=normal2)){
 					//						bw.write("3,"+diff);
