@@ -12,7 +12,7 @@ public class MakeSegments {
 	//	public static String basicpath = "c:/users/yabetaka/Desktop/";
 	public static String basicpath = "c:/users/t-tyabe/Desktop/";
 	public static String lvl = "3";
-	public static Double ht  = 17d;
+	public static Double ht  = 20d;
 	public static Double ht2  = 22d;
 	public static Double normal = 16d;
 	public static Double normal2 = 20d;
@@ -21,7 +21,7 @@ public class MakeSegments {
 	public static void main(String args[]) throws IOException{
 
 		File in = new File(basicpath+"office_exit_diff_emg1_final.csv");
-		File out = new File(basicpath+"eq_levels.csv");
+		File out = new File(basicpath+"eq_levels2.csv");
 
 		BufferedReader br = new BufferedReader(new FileReader(in));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(out));
@@ -42,23 +42,23 @@ public class MakeSegments {
 			Double distance = Double.parseDouble(ts[8])*100;
 
 			if((hittime>=ht)&&(hittime<=ht2)){
-//				bw.write("1,"+diff);
-//				bw.newLine();
+				//				bw.write("1,"+diff);
+				//				bw.newLine();
 				if(level.equals("4")){
 					bw.write(line);
 					bw.newLine();
-//					if((normaltime>=normal)&&(normaltime<=normal2)){
-//						bw.write("3,"+diff);
-//						bw.newLine();
-//					}
-//					else if(normaltime<=normal){
-//						bw.write("4,"+diff);
-//						bw.newLine();
-//					}
-//					else if(normaltime>=normal2){
-//						bw.write("5,"+diff);
-//						bw.newLine();
-//					}
+					//					if((normaltime>=normal)&&(normaltime<=normal2)){
+					//						bw.write("3,"+diff);
+					//						bw.newLine();
+					//					}
+					//					else if(normaltime<=normal){
+					//						bw.write("4,"+diff);
+					//						bw.newLine();
+					//					}
+					//					else if(normaltime>=normal2){
+					//						bw.write("5,"+diff);
+					//						bw.newLine();
+					//					}
 				}
 				else if (level.equals("1")){
 					bw.write("1, " + diff);
