@@ -33,7 +33,7 @@ public class MakeSegments {
 
 		while((line=br.readLine())!=null){
 			String[] ts = line.split(",");
-			String diff = ts[1];
+			String diff = ts[7];
 			String level = ts[3];
 			Double hittime = Double.parseDouble(ts[4]);
 			Double normaltime = Double.parseDouble(ts[5]);
