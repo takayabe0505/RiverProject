@@ -21,7 +21,7 @@ public class MakeSegments {
 	public static void main(String args[]) throws IOException{
 
 		File in = new File(basicpath+"office_exit_diff_rain_final.csv");
-		File out = new File(basicpath+"rain_level1and4.csv");
+		File out = new File(basicpath+"rain_between17and22.csv");
 
 		BufferedReader br = new BufferedReader(new FileReader(in));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(out));
@@ -44,8 +44,8 @@ public class MakeSegments {
 			if((hittime>=ht)&&(hittime<=ht2)){
 //				bw.write("1,"+diff);
 //				bw.newLine();
-				if(level.equals("4")){
-					bw.write("4,"+diff);
+//				if(level.equals("4")){
+					bw.write(line);
 					bw.newLine();
 //					if((normaltime>=normal)&&(normaltime<=normal2)){
 //						bw.write("3,"+diff);
@@ -59,19 +59,19 @@ public class MakeSegments {
 //						bw.write("5,"+diff);
 //						bw.newLine();
 //					}
-				}
-				else if (level.equals("1")){
-					bw.write("1, " + diff);
-					bw.newLine();
-				}
-				else if (level.equals("2")){
-					bw.write("2, " + diff);
-					bw.newLine();
-				}
-				else if (level.equals("3")){
-					bw.write("3, " + diff);
-					bw.newLine();
-				}
+//				}
+//				else if (level.equals("1")){
+//					bw.write("1, " + diff);
+//					bw.newLine();
+//				}
+//				else if (level.equals("2")){
+//					bw.write("2, " + diff);
+//					bw.newLine();
+//				}
+//				else if (level.equals("3")){
+//					bw.write("3, " + diff);
+//					bw.newLine();
+//				}
 			}
 		}
 		bw.close();
