@@ -46,12 +46,12 @@ public class DivideLogsbyID {
 		BufferedWriter bw = new BufferedWriter(new FileWriter(out,true));
 		String line = null;
 		while((line=br.readLine())!=null){
-			String[] tokens = line.split("\t");
+			String[] tokens = line.split(",");
 			String id = tokens[0];		
 			if(ids.equals(id)){
-				String time = getfulltime(tokens[4]);
+				String time = getfulltime(tokens[3]);
 				Double lat = Double.parseDouble(tokens[2]);
-				Double lon = Double.parseDouble(tokens[3]);
+				Double lon = Double.parseDouble(tokens[1]);
 				bw.write(id+","+lon+","+lat+","+time);
 				bw.newLine();
 			}
