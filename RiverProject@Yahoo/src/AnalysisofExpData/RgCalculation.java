@@ -39,7 +39,7 @@ public class RgCalculation {
 			}
 			for(String id : alldata.get(date).keySet()){
 				
-				Double rg = gyration(alldata.get(date).get(id));
+				Double rg = gyration(alldata.get(date).get(id))/1000;
 				
 				String points = String.valueOf(alldata.get(date).get(id).size());
 				String strrg = String.valueOf(rg);
