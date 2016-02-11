@@ -21,7 +21,7 @@ public class RgCalculation {
 		HashMap<String,String> IDs = getIDs(IDFile);
 		System.out.println("got IDs:" + IDs.size());
 
-		File res = new File(basicpath+"flood_result.csv");
+		File res = new File(basicpath+"flood_result_rg.csv");
 		BufferedWriter bw = new BufferedWriter(new FileWriter(res,true));
 
 		File in = new File(basicpath+"logsofIDwithhomesinArea20150910.csv");
