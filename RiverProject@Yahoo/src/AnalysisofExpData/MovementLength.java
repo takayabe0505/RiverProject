@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -22,16 +21,17 @@ public class MovementLength {
 
 	public static void main(String args[]) throws IOException{
 
-		File IDFile = new File(basicpath+"id_home_real.csv");
-		HashSet<String> IDs = getIDs(IDFile);
+		File IDFile = new File(basicpath+"id_evac_yesno.csv");
+		HashMap<String,String> IDs = getIDs(IDFile);
 		System.out.println("got IDs:" + IDs.size());
 
-		File res = new File(basicpath+"flood_length3.csv");
+		File res = new File(basicpath+"flood_result.csv");
 		BufferedWriter bw = new BufferedWriter(new FileWriter(res,true));
 
 		File in = new File(basicpath+"logsofIDwithhomesinArea20150910.csv");
 		HashMap<String, HashMap<String, HashMap<Integer,LonLat>>> alldata = getallData(in,IDs);
 		System.out.println("size of map:" +alldata.size());
+		
 		for(String date : alldata.keySet()){
 			String day = date.split("-")[2];
 			String intday = String.valueOf(Integer.valueOf(day));
@@ -40,12 +40,14 @@ public class MovementLength {
 				String points = String.valueOf(alldata.get(date).get(id).size());
 				String strdis = String.valueOf(distance);
 				if(distance<1000d){
-					bw.write(id + "," + intday + "," + strdis + "," + points);
+					bw.write(id + "," + IDs.get(id) + "," + intday + "," + strdis + "," + points);
 					bw.newLine();
 				}
 			}
 		}
 		bw.close();
+		
+		
 	}
 
 	public static Double calculateLength(HashMap<Integer,LonLat> map){ //return km
@@ -76,18 +78,19 @@ public class MovementLength {
 		return lengthsum/1000d;
 	}
 
-	public static HashSet<String> getIDs(File in) throws IOException{
-		HashSet<String> targetIDs = new HashSet<String>();
+	public static HashMap<String,String> getIDs(File in) throws IOException{
+		HashMap<String,String> targetIDs = new HashMap<String,String>();
 		BufferedReader br = new BufferedReader(new FileReader(in));
 		String line = null;
 		while((line=br.readLine())!=null){
-			targetIDs.add(line);
+			String[] tokens = line.split(",");
+			targetIDs.put(tokens[0],tokens[1]);
 		}
 		br.close();
 		return targetIDs;
 	}
 
-	public static HashMap<String, HashMap<String, HashMap<Integer,LonLat>>> getallData(File in, HashSet<String> ids) throws NumberFormatException, IOException{
+	public static HashMap<String, HashMap<String, HashMap<Integer,LonLat>>> getallData(File in, HashMap<String,String> ids) throws NumberFormatException, IOException{
 
 		HashMap<String, HashMap<String, HashMap<Integer,LonLat>>> res = new HashMap<String,HashMap<String, HashMap<Integer,LonLat>>>();
 
@@ -96,7 +99,7 @@ public class MovementLength {
 		while((line=br.readLine())!=null){
 			String[] tokens = line.split(",");
 			String id = tokens[0];		
-			if(ids.contains(id)){
+			if(ids.keySet().contains(id)){
 				Integer time = getonlytimeinsecs(tokens[3]);
 				String date = getonlydate(tokens[3]);
 
